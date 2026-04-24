@@ -41,9 +41,9 @@ const sendSignal = async () => {
     
     try {
         const templateParams = {
-            from_email: contactForm.value.email,
-            subject: contactForm.value.subject || "No Subject",
-            message: contactForm.value.message,
+            from_name: contactForm.value.email, // Gửi email vào biến {{from_name}}
+            title: contactForm.value.subject || "No Subject", // Gửi subject vào biến {{title}}
+            message: contactForm.value.message, // Biến {{message}}
             to_name: "Goatn4b1"
         };
 
