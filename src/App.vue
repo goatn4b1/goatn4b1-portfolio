@@ -40,8 +40,8 @@ const sendSignal = async () => {
     sendStatus.value = 'sending';
     
     try {
-        // Chèn Public Key của bạn vào đây sau khi đăng ký EmailJS
-        // emailjs.init("YOUR_PUBLIC_KEY");
+        // Khởi tạo với Public Key của bạn
+        emailjs.init("FxhqoPoEyuGjSZuvvds8W");
         
         const templateParams = {
             from_email: contactForm.value.email,
@@ -50,11 +50,8 @@ const sendSignal = async () => {
             to_name: "Goatn4b1"
         };
 
-        // Gửi qua EmailJS (Tôi để sẵn cấu trúc, bạn chỉ cần thay ID)
-        // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
-        
-        // Giả lập gửi thành công (Vì chưa có ID thực tế)
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Gửi qua EmailJS sử dụng bộ mã hoàn chỉnh
+        await emailjs.send('service_md996e3', 'template_rx8bu1p', templateParams);
         
         sendStatus.value = 'success';
         contactForm.value = { email: '', subject: '', message: '' };
