@@ -1,0 +1,16 @@
+{
+    "hero_role": "Full Stack Developer",
+    "hero_slogan": "Delivering <span class='text-white'>Comprehensive Web Solutions</span> for all business models.<br/>Optimized Performance - Ultimate Security - Scalable Architecture.",
+    "cta_contact": "CONTACT NOW",
+    "nav_home": "00_HOME",
+    "nav_stack": "01_STACK",
+    "nav_projects": "02_PROJECTS",
+    "nav_services": "03_SERVICES",
+    "nav_contact": "04_CONTACT",
+    "section_stack": "TECHNOLOGIES USED [TECH_STACK]",
+    "section_projects": "PROJECT SHOWCASE [SHOWCASE]",
+    "section_services": "SERVICES & SOLUTIONS [SERVICES]",
+    "section_contact": "SYSTEM CONNECT [CONTACT]",
+    "filter_all": "All",
+    "send_signal": "Send Signal"
+}

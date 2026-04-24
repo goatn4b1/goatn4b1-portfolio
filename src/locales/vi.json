@@ -1,0 +1,16 @@
+{
+    "hero_role": "Full Stack Developer",
+    "hero_slogan": "Cung cấp <span class='text-white'>Giải pháp Web toàn diện</span> cho mọi mô hình kinh doanh.<br/>Tối ưu hiệu năng - Bảo mật tuyệt đối - Sẵn sàng bứt phá.",
+    "cta_contact": "LIÊN HỆ NGAY",
+    "nav_home": "00_TRANG_CHỦ",
+    "nav_stack": "01_CÔNG_NGHỆ",
+    "nav_projects": "02_DỰ_ÁN",
+    "nav_services": "03_DỊCH_VỤ",
+    "nav_contact": "04_LIÊN_HỆ",
+    "section_stack": "CÔNG NGHỆ SỬ DỤNG [TECH_STACK]",
+    "section_projects": "TRƯNG BÀY DỰ ÁN [SHOWCASE]",
+    "section_services": "DỊCH VỤ & GIẢI PHÁP [SERVICES]",
+    "section_contact": "KẾT NỐI HỆ THỐNG [CONTACT]",
+    "filter_all": "Tất cả",
+    "send_signal": "Gửi tín hiệu"
+}
