@@ -19,7 +19,7 @@ watch([currentLocale, translations], () => {
 }, { immediate: true });
 
 const terminalText = ref('');
-const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.2.0_MAIL_ENABLED... [OK]";
+const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.2.2_STABLE... [OK]";
 let index = 0;
 
 const currentSlide = ref(0);
@@ -47,7 +47,7 @@ const sendSignal = async () => {
             to_name: "Goatn4b1"
         };
 
-        // Gửi trực tiếp kèm theo Public Key mới nhất
+        // Gửi trực tiếp kèm theo Public Key mới nhất của bạn
         await emailjs.send(
             'service_md996e3', 
             'template_rx8bu1p', 
@@ -154,7 +154,7 @@ const services = computed(() => [
             <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
                 <div class="text-hacker font-bold tracking-tighter animate-pulse text-sm md:text-base cursor-pointer flex items-center" @click="goToSlide(0)">
                     <span class="w-2 h-2 bg-hacker rounded-full mr-2 shadow-[0_0_8px_#00FF41]"></span>
-                    GOATN4B1_OS
+                    GOATN4B1_OS <span class="ml-2 text-[8px] bg-hacker text-black px-1">V2.2.2</span>
                 </div>
                 
                 <div class="flex items-center space-x-8">
@@ -347,7 +347,7 @@ const services = computed(() => [
                                     </div>
                                 </div>
                                 <div class="p-6 border border-dashed border-hacker/30 text-[10px] text-hacker-dim italic">
-                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.2.0 (MAIL_NODE)
+                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.2.2 (READY)
                                 </div>
                             </div>
                         </div>
@@ -435,7 +435,7 @@ body {
     }
     99% {
         text-shadow: 0.025em 0.05em 0 rgba(255, 0, 0, 0.75),
-                    0.05em 0 0 rgba(0, 255, 0, 0.75),
+                    0.05em 0 0 rgba(0, 0, 0.75),
                     0 -0.05em 0 rgba(0, 0, 255, 0.75);
     }
     100% {
