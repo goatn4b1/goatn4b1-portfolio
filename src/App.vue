@@ -18,7 +18,7 @@ watch([currentLocale, translations], () => {
 }, { immediate: true });
 
 const terminalText = ref('');
-const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.1.2_STABLE... [OK]";
+const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.1.5_FINAL... [OK]";
 let index = 0;
 
 const currentSlide = ref(0);
@@ -40,9 +40,11 @@ const handleScroll = (event) => {
             triggerScrollLock();
         }
     } else {
-        if (currentSlide.value > 0) {
-            goToSlide(currentSlide.value - 1);
-            triggerScrollLock();
+        if (currentLocale.value === 'vi' || currentLocale.value === 'en') { // Always allow scroll up if not at top
+             if (currentSlide.value > 0) {
+                goToSlide(currentSlide.value - 1);
+                triggerScrollLock();
+            }
         }
     }
 };
@@ -106,7 +108,8 @@ const services = computed(() => [
         <!-- HEADER NAVIGATION -->
         <nav class="fixed top-0 left-0 w-full z-[100] border-b border-hacker/20 bg-black/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
-                <div class="text-hacker font-bold tracking-tighter animate-pulse text-sm md:text-base cursor-pointer" @click="goToSlide(0)">
+                <div class="text-hacker font-bold tracking-tighter animate-pulse text-sm md:text-base cursor-pointer flex items-center" @click="goToSlide(0)">
+                    <span class="w-2 h-2 bg-hacker rounded-full mr-2 shadow-[0_0_8px_#00FF41]"></span>
                     GOATN4B1_OS
                 </div>
                 
@@ -285,13 +288,13 @@ const services = computed(() => [
                                 <div>
                                     <h4 class="text-white font-bold mb-4 uppercase">Direct_Access</h4>
                                     <div class="space-y-2 text-sm text-hacker-dim">
-                                        <p>GITHUB: <a href="https://github.com/Goatn4b1" target="_blank" class="text-hacker hover:underline">github.com/Goatn4b1</a></p>
-                                        <p>LINKEDIN: <a href="https://linkedin.com/in/goatn4b1" target="_blank" class="text-hacker hover:underline">linkedin.com/in/goatn4b1</a></p>
-                                        <p>DISCORD: <span class="text-hacker">Goatn4b1#0000</span></p>
+                                        <p>GITHUB: <a href="https://github.com/goatn4b1" target="_blank" class="text-hacker hover:underline">github.com/goatn4b1</a></p>
+                                        <p>Email: <a href="mailto:goatn4b1@gmail.com" class="text-hacker hover:underline">goatn4b1@gmail.com</a></p>
+                                        <p>DISCORD: <span class="text-hacker hover:underline">@goatn4b1</span></p>
                                     </div>
                                 </div>
                                 <div class="p-6 border border-dashed border-hacker/30 text-[10px] text-hacker-dim italic">
-                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.1.2 (PROD_NODE)
+                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.1.5 (FINAL_BUILD)
                                 </div>
                             </div>
                         </div>
