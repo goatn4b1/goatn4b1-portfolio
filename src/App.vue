@@ -18,7 +18,7 @@ watch([currentLocale, translations], () => {
 }, { immediate: true });
 
 const terminalText = ref('');
-const fullText = "> BOOTING GOATN4B1_OS... SYSTEM_READY... [OK]";
+const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.1.2_STABLE... [OK]";
 let index = 0;
 
 const currentSlide = ref(0);
@@ -291,7 +291,7 @@ const services = computed(() => [
                                     </div>
                                 </div>
                                 <div class="p-6 border border-dashed border-hacker/30 text-[10px] text-hacker-dim italic">
-                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.1.0 (STATIC_NODE)
+                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.1.2 (PROD_NODE)
                                 </div>
                             </div>
                         </div>
