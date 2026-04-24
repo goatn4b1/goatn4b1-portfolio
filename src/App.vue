@@ -47,12 +47,12 @@ const sendSignal = async () => {
             to_name: "Goatn4b1"
         };
 
-        // Gửi trực tiếp kèm theo Public Key chính xác
+        // Gửi trực tiếp kèm theo Public Key mới nhất
         await emailjs.send(
             'service_md996e3', 
             'template_rx8bu1p', 
             templateParams, 
-            'eaVBfjjx9Tgu_SXOh'
+            '0eBTftaF-Kf86IRKj'
         );
         
         sendStatus.value = 'success';
