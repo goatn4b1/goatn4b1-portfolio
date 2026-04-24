@@ -40,25 +40,32 @@ const sendSignal = async () => {
     sendStatus.value = 'sending';
     
     try {
-        // Khởi tạo với Public Key của bạn
-        emailjs.init("FxhqoPoEyuGjSZuvvds8W");
-        
         const templateParams = {
             from_email: contactForm.value.email,
-            subject: contactForm.value.subject,
+            subject: contactForm.value.subject || "No Subject",
             message: contactForm.value.message,
             to_name: "Goatn4b1"
         };
 
-        // Gửi qua EmailJS sử dụng bộ mã hoàn chỉnh
-        await emailjs.send('service_md996e3', 'template_rx8bu1p', templateParams);
+        // Gửi trực tiếp kèm theo Public Key chính xác
+        await emailjs.send(
+            'service_md996e3', 
+            'template_rx8bu1p', 
+            templateParams, 
+            'eaVBfjjx9Tgu_SXOh'
+        );
         
         sendStatus.value = 'success';
         contactForm.value = { email: '', subject: '', message: '' };
         
         setTimeout(() => { sendStatus.value = 'idle'; }, 5000);
     } catch (error) {
-        console.error('MAIL_ERROR:', error);
+        // In ra chi tiết lỗi để chẩn đoán
+        console.error('--- MAIL_SYSTEM_FAILURE ---');
+        console.error('Status:', error.status);
+        console.error('Message:', error.text);
+        console.error('Full Error:', error);
+        
         sendStatus.value = 'error';
         setTimeout(() => { sendStatus.value = 'idle'; }, 5000);
     }
