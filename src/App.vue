@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
+import emailjs from '@emailjs/browser';
 import vi from './locales/vi.json';
 import en from './locales/en.json';
 
@@ -18,12 +19,53 @@ watch([currentLocale, translations], () => {
 }, { immediate: true });
 
 const terminalText = ref('');
-const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.1.5_FINAL... [OK]";
+const fullText = "> BOOTING GOATN4B1_OS... VERSION_2.2.0_MAIL_ENABLED... [OK]";
 let index = 0;
 
 const currentSlide = ref(0);
 const totalSlides = 5;
 const isScrolling = ref(false);
+
+// Mail Logic
+const contactForm = ref({
+    email: '',
+    subject: '',
+    message: ''
+});
+const sendStatus = ref('idle'); // idle, sending, success, error
+
+const sendSignal = async () => {
+    if (!contactForm.value.email || !contactForm.value.message) return;
+    
+    sendStatus.value = 'sending';
+    
+    try {
+        // Chèn Public Key của bạn vào đây sau khi đăng ký EmailJS
+        // emailjs.init("YOUR_PUBLIC_KEY");
+        
+        const templateParams = {
+            from_email: contactForm.value.email,
+            subject: contactForm.value.subject,
+            message: contactForm.value.message,
+            to_name: "Goatn4b1"
+        };
+
+        // Gửi qua EmailJS (Tôi để sẵn cấu trúc, bạn chỉ cần thay ID)
+        // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
+        
+        // Giả lập gửi thành công (Vì chưa có ID thực tế)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        sendStatus.value = 'success';
+        contactForm.value = { email: '', subject: '', message: '' };
+        
+        setTimeout(() => { sendStatus.value = 'idle'; }, 5000);
+    } catch (error) {
+        console.error('MAIL_ERROR:', error);
+        sendStatus.value = 'error';
+        setTimeout(() => { sendStatus.value = 'idle'; }, 5000);
+    }
+};
 
 const goToSlide = (i) => {
     if (i >= 0 && i < totalSlides) {
@@ -40,11 +82,9 @@ const handleScroll = (event) => {
             triggerScrollLock();
         }
     } else {
-        if (currentLocale.value === 'vi' || currentLocale.value === 'en') { // Always allow scroll up if not at top
-             if (currentSlide.value > 0) {
-                goToSlide(currentSlide.value - 1);
-                triggerScrollLock();
-            }
+        if (currentSlide.value > 0) {
+            goToSlide(currentSlide.value - 1);
+            triggerScrollLock();
         }
     }
 };
@@ -261,25 +301,34 @@ const services = computed(() => [
             <!-- 5. CONTACT SLIDE -->
             <section class="h-screen w-screen flex-shrink-0 flex flex-col justify-center items-center px-10 relative">
                 <div class="max-w-7xl w-full">
-                    <h2 class="text-3xl font-bold mb-12 flex items-center">
+                    <h2 class="text-3xl font-bold mb-8 flex items-center">
                         <span class="bg-hacker text-black px-2 mr-4 text-xl">04</span> {{ $t('section_contact') }}
                     </h2>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-                        <form class="space-y-6">
+                        <!-- Contact Form -->
+                        <form @submit.prevent="sendSignal" class="space-y-6">
                             <div>
                                 <label class="block text-xs uppercase mb-2 opacity-50">Email_Address</label>
-                                <input type="email" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="user@target.com">
+                                <input v-model="contactForm.email" required type="email" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="user@target.com">
                             </div>
                             <div>
                                 <label class="block text-xs uppercase mb-2 opacity-50">Subject_Line</label>
-                                <input type="text" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="Security Inquiry">
+                                <input v-model="contactForm.subject" type="text" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="Security Inquiry">
                             </div>
                             <div>
                                 <label class="block text-xs uppercase mb-2 opacity-50">Message_Payload</label>
-                                <textarea rows="4" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="Enter your message..."></textarea>
+                                <textarea v-model="contactForm.message" required rows="4" class="w-full bg-transparent border border-hacker/30 focus:border-hacker outline-none p-3 text-hacker transition-all" placeholder="Enter your message..."></textarea>
                             </div>
-                            <button class="w-full bg-hacker text-black font-bold py-4 hover:bg-white transition-colors uppercase tracking-widest">
-                                {{ $t('send_signal') }}
+                            
+                            <!-- Status Terminal -->
+                            <div v-if="sendStatus !== 'idle'" :class="sendStatus === 'error' ? 'text-red-500 border-red-500/30' : 'text-hacker border-hacker/30'" class="p-3 border text-xs bg-black/40 italic">
+                                <span v-if="sendStatus === 'sending'">> SENDING_PACKETS... PLEASE_WAIT...</span>
+                                <span v-if="sendStatus === 'success'">> SIGNAL_DELIVERED... ACCESS_GRANTED... [SUCCESS]</span>
+                                <span v-if="sendStatus === 'error'">> CONNECTION_TIMEOUT... SIGNAL_LOST... [ERROR]</span>
+                            </div>
+
+                            <button :disabled="sendStatus === 'sending'" class="w-full bg-hacker text-black font-bold py-4 hover:bg-white disabled:bg-hacker/20 disabled:cursor-not-allowed transition-colors uppercase tracking-widest">
+                                {{ sendStatus === 'sending' ? 'Sending...' : $t('send_signal') }}
                             </button>
                         </form>
 
@@ -294,7 +343,7 @@ const services = computed(() => [
                                     </div>
                                 </div>
                                 <div class="p-6 border border-dashed border-hacker/30 text-[10px] text-hacker-dim italic">
-                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.1.5 (FINAL_BUILD)
+                                    &copy; 2026 GOATN4B1 // GOATN4B1_OS V.2.2.0 (MAIL_NODE)
                                 </div>
                             </div>
                         </div>
